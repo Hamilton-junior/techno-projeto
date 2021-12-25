@@ -1,32 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="./vue.js"></script>
-    <title>Techno</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
 
-  <body>
-    <div id="app">
-      <section class="products">
-        <div v-for="product in products" :key="product.id" class="product">
-          <img :src="product.img" :alt="product.nome" class="product_img" />
-          <div class="product_info">
-            <span class="product_price">{{product.preco}}</span>
-            <h2 class="product_title">{{product.nome}}</h2>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Techno</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <section class="products">
+      <div v-for="product in products" :key="product.id" class="product">
+        <img :src="product.img" :alt="product.nome" class="product_img" />
+        <div class="product_info">
+          <span class="product_price">{{product.preco | priceNumber}}</span>
+          <h2 class="product_title">{{product.nome}}</h2>
         </div>
-      </section>
-    </div>
-    <script src="./app.js"></script>
-  </body>
+      </div>
+    </section>
+  </div>
+  <script src="./app.js"></script>
+</body>
+
 </html>
