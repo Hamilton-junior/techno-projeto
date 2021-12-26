@@ -4,6 +4,8 @@ const vm = new Vue({
     products: [],
     product: false,
     cart: [],
+    messageAlert: 'Item adicionado',
+    alertActive: false,
   },
   filters: {
     priceNumber(value) {
@@ -55,6 +57,7 @@ const vm = new Vue({
       this.product.estoque--;
       const { id, nome, preco } = this.product;
       this.cart.push({ id, nome, preco });
+      this.alert(`${nome} adicionado ao carrinho.`);
     },
     removeItem(index) {
       this.cart.splice(index, 1);
@@ -63,6 +66,13 @@ const vm = new Vue({
       if (window.localStorage.cart) {
         this.cart = JSON.parse(window.localStorage.cart);
       }
+    },
+    alert(message) {
+      this.messageAlert = message;
+      this.alertActive = true;
+      setTimeout(() => {
+        this.alertActive = false;
+      }, 1500);
     },
   },
   watch: {
