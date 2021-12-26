@@ -15,6 +15,24 @@
 
 <body>
   <div id="app">
+    <header class="header">
+      <img class="logo" src="./assets/techno.svg" alt="Techno">
+      <div class="cart_menu">
+        {{cartTotal | priceNumber}} | {{cart.length}}
+      </div>
+    </header>
+
+
+    <section class="products">
+      <div v-for="item in products" :key="item.id" @click="openModal(item.id)" class="product">
+        <img :src="item.img" :alt="item.nome" class="product_img" />
+        <div class="product_info">
+          <span class="product_price">{{item.preco | priceNumber}}</span>
+          <h2 class="product_title">{{item.nome}}</h2>
+        </div>
+      </div>
+    </section>
+
     <section class="modal" v-if="product" @click="closeModal">
       <div class="modal_container">
         <div class="modal_img">
@@ -25,7 +43,8 @@
           <span class="modal_price">{{product.preco}}</span>
           <h2 class="modal_title">{{product.nome}}</h2>
           <p>{{product.descricao}}</p>
-          <button class="modal_btn">Adicionar Item</button>
+          <button class="modal_btn" v-if="product.estoque > 0" @click="addItem">Adicionar Item</button>
+          <button class="modal_btn exhausted" disabled v-else>Produto Esgotado</button>
         </div>
         <div class="reviews">
           <h2 class="reviews_subtitle">Avaliações</h2>
@@ -35,15 +54,6 @@
               <p class="review_user">{{review.nome}} | {{review.estrelas}}</p>
             </li>
           </ul>
-        </div>
-      </div>
-    </section>
-    <section class="products">
-      <div v-for="item in products" :key="item.id" @click="openModal(item.id)" class="product">
-        <img :src="item.img" :alt="item.nome" class="product_img" />
-        <div class="product_info">
-          <span class="product_price">{{item.preco | priceNumber}}</span>
-          <h2 class="product_title">{{item.nome}}</h2>
         </div>
       </div>
     </section>

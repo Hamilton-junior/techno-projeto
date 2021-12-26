@@ -3,6 +3,7 @@ const vm = new Vue({
   data: {
     products: [],
     product: false,
+    cart: [],
   },
   filters: {
     priceNumber(value) {
@@ -10,6 +11,17 @@ const vm = new Vue({
         style: 'currency',
         currency: 'BRL',
       });
+    },
+  },
+  computed: {
+    cartTotal() {
+      let total = 0;
+      if (this.cart.length) {
+        this.cart.forEach((item) => {
+          total += item.preco;
+        });
+      }
+      return total;
     },
   },
   methods: {
@@ -38,6 +50,14 @@ const vm = new Vue({
       if (target === currentTarget) {
         this.product = false;
       }
+    },
+    addItem() {
+      this.product.estoque--;
+      const { id, nome, preco } = this.product;
+      this.cart.push({ id, nome, preco });
+    },
+    removeItem(index) {
+      this.cart.splice(index, 1);
     },
   },
   created() {
