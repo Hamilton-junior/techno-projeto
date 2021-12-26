@@ -27,6 +27,18 @@ const vm = new Vue({
           this.product = data;
         });
     },
+    openModal(id) {
+      this.fetchProduct(id);
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+    closeModal({ target, currentTarget }) {
+      if (target === currentTarget) {
+        this.product = false;
+      }
+    },
   },
   created() {
     this.fetchProducts();
