@@ -73,6 +73,14 @@ const vm = new Vue({
         this.cart = JSON.parse(window.localStorage.cart);
       }
     },
+    compareStock() {
+      const items = this.cart.filter(({ id }) => {
+        if (id === this.product.id) {
+          return true;
+        }
+      });
+      this.product.estoque -= items.length;
+    },
     alert(message) {
       this.messageAlert = message;
       this.alertActive = true;
@@ -93,6 +101,9 @@ const vm = new Vue({
       document.title = this.product.nome || 'Techno';
       const hash = this.product.id || '';
       history.pushState(null, null, `#${hash}`);
+      if (this.product) {
+        this.compareStock();
+      }
     },
     cart() {
       window.localStorage.cart = JSON.stringify(this.cart);
