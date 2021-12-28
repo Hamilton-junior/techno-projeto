@@ -17,7 +17,7 @@
   <div id="app">
     <header class="header">
       <img class="logo" src="./assets/techno.svg" alt="Techno">
-      <div class="cart_menu">
+      <div class="cart_menu" @click="cartActive = true">
         {{cartTotal | priceNumber}} | {{cart.length}}
       </div>
     </header>
@@ -55,6 +55,25 @@
             </li>
           </ul>
         </div>
+      </div>
+    </section>
+
+    <section class="cart_modal" :class="{activeCart: cartActive}" @click="closeCart">
+      <div class="cart_container">
+        <button class="cart_close" @click="cartActive = false">X</button>
+        <h2 class="cart_title">Carrinho</h2>
+        <div v-if="cart.length > 0">
+          <ul class="cart_list">
+            <li v-for="(item, index) in cart" class="cart_item">
+              <p>{{item.nome}}</p>
+              <p class="cart_price">{{item.preco | priceNumber}}</p>
+              <button class="cart_remove" @click="removeItem(index)">X</button>
+            </li>
+          </ul>
+          <p class="cart_total">{{cartTotal | priceNumber}}</p>
+          <button class="cart_finish">Finalizar Compra</button>
+        </div>
+        <p v-else>O carrinho está vazio.</p>
       </div>
     </section>
 
